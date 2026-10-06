@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plantas vs Zombis online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Crimson+Pro:ital,wght@0,500;0,700;1,500&display=swap">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <main class="juego">
+    <h1>Plantas vs Zombis online <small id="rolTexto" class="rol"></small></h1>
+
+    <section class="barra">
+      <div class="soles"><span id="icono">☀️</span> <span id="recurso">0</span></div>
+      <div id="cartas" class="cartas"></div>
+      <button id="pantalla" class="pantalla" title="Pantalla completa (F)" aria-label="Pantalla completa">⛶</button>
+      <div class="oleada">🎯 Dianas: <span id="tiempo">3/3</span></div>
+    </section>
+
+    <section class="campo">
+      <canvas id="lienzo" width="800" height="440"></canvas>
+
+      <div id="lobby" class="menu">
+        <h2>Partida 1 contra 1</h2>
+        <p class="info">Creá una partida y pasale el código a tu rival.</p>
+        <div class="opciones">
+          <button id="crearP" class="grande">🌻 Jugar con plantas</button>
+          <button id="crearZ" class="grande">🧟 Jugar con zombis</button>
+        </div>
+        <p class="info">o unite con el código de tu rival</p>
+        <div class="fila-botones">
+          <input id="codigo" maxlength="4" placeholder="ABCD" autocomplete="off">
+          <button id="unirse" class="grande">Unirse</button>
+        </div>
+        <p id="estado" class="info"></p>
+      </div>
+
+      <div id="seleccion" class="menu" hidden>
+        <h2>Elegí tus cartas <span id="contador">0/6</span></h2>
+        <div id="rejilla" class="rejilla"></div>
+        <p id="info" class="info">Tocá una carta para elegirla o quitarla.</p>
+        <button id="listo" class="grande">¡Listo!</button>
+      </div>
+
+      <div id="fin" class="fin" hidden>
+        <h2 id="finTitulo"></h2>
+        <button id="volver">Volver al inicio</button>
+      </div>
+    </section>
+
+    <p class="ayuda">Plantas: destruí las tumbas y las 3 dianas 🎯 que esconden. Recogé los soles ☀️. Zombis: recogé cerebros 🧠, poné tumbas 🪦 que los produzcan y protegé las dianas. Teclas 1, 2, 3… eligen cartas. F = pantalla completa.</p>
+  </main>
+  <script src="cliente.js"></script>
+</body>
+</html>

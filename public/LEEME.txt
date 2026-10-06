@@ -1,0 +1,59 @@
+IMÁGENES DEL JUEGO
+==================
+Poné tus PNG en esta carpeta con estos nombres. Las que falten se
+reemplazan automáticamente por emojis, así que podés ir agregándolas
+de a una.
+
+HOJAS DE SPRITES (cuadros en fila horizontal, todos del mismo tamaño)
+Archivo                    Cuadros  Tamaño de 1 cuadro   Total de la imagen
+fondo.png                  -        -                    800 x 440 (imagen fija)
+girasol.png                6        80 x 80              480 x 80
+lanzaguisantes.png         6        80 x 80              480 x 80
+nuez.png                   4        80 x 80              320 x 80
+cereza.png                 4        80 x 80              320 x 80
+zombi_caminar.png          8        100 x 120            800 x 120
+zombi_comer.png            6        100 x 120            600 x 120
+zombicono_caminar.png      8        100 x 120            800 x 120
+zombicono_comer.png        6        100 x 120            600 x 120
+guisante.png               1        20 x 20              20 x 20
+sol.png                    8        64 x 64              512 x 64
+cortadora.png              1        60 x 50              60 x 50
+
+ICONOS DE LAS CARTAS (imagen fija, se muestran a 44 x 44)
+icono_girasol.png
+icono_lanzaguisantes.png
+icono_nuez.png
+icono_cereza.png
+
+CÓMO USAR OTROS TAMAÑOS
+Abrí script.js y editá el objeto SPRITES (arriba del todo): cambiá
+cuadros, ancho y alto para que coincidan con tu hoja. Si el dibujo
+queda muy grande o chico, ajustá "escala". Si queda corrido, usá dx/dy.
+Para pixel art, poné CONFIG.pixelArt = true.
+
+NOTA: si abrís index.html directo con doble clic y las imágenes no
+cargan, probá con un servidor local (por ejemplo "python -m http.server"
+en esta carpeta y abrir http://localhost:8000).
+
+PLANTAS NUEVAS (hojas de 80 x 80 por cuadro)
+hielaguisantes.png   6 cuadros   |  repetidora.png       6 cuadros
+nuezalta.png         4 cuadros   |  jalapeno.png         4 cuadros
+papamina.png         4 cuadros   |  carnivora.png        6 cuadros
+aplastacalabaza.png  4 cuadros   |  guisante_hielo.png   1 cuadro de 20 x 20
+Iconos de cartas: icono_hielaguisantes.png, icono_repetidora.png, icono_nuezalta.png,
+icono_jalapeno.png, icono_papamina.png, icono_carnivora.png, icono_aplastacalabaza.png
+
+ZOMBIS (cada tipo usa dos hojas: caminar y comer, de 100 x 120 por cuadro, igual que el zombi normal)
+zombibandera_caminar.png / _comer.png      zombisaltador_caminar.png / _comer.png
+zombiperiodico_caminar.png / _comer.png    zombipuerta_caminar.png / _comer.png
+zombicaja_caminar.png / _comer.png         zombibalde_caminar.png / _comer.png
+zombifutbolista_caminar.png / _comer.png   zombigigante_caminar.png / _comer.png
+(el zombi gigante se dibuja 1.5 veces más grande)
+Iconos de cartas de zombi: icono_normal.png, icono_bandera.png, icono_saltador.png, icono_cono.png,
+icono_periodico.png, icono_puerta.png, icono_caja.png, icono_balde.png, icono_futbolista.png, icono_gigante.png
+
+TUMBAS, DIANAS Y CEREBROS (imágenes fijas)
+tumba.png     80 x 80
+diana.png     80 x 80   (la diana queda debajo de la tumba hasta que la destruyen)
+cerebro.png   48 x 48   (cerebro que cae y se recoge con un clic)
+icono_tumba.png   icono de la carta de tumba
