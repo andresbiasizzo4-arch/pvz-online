@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plantas vs Zombis online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Crimson+Pro:ital,wght@0,500;0,700;1,500&display=swap">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <main class="juego">
+    <h1>Plantas vs Zombis online <small id="rolTexto" class="rol"></small></h1>
+
+    <section class="barra">
+      <div class="soles"><span id="icono">☀️</span> <span id="recurso">0</span></div>
+      <div id="cartas" class="cartas"></div>
+      <button id="pala" class="carta pala" hidden aria-label="Pala">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M33 5L21 25M29 4h9" stroke="#6b4423" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M21 24c-6 0-12 6-13 17 10 0 17-5 18-13z" fill="#8a8f96" stroke="#3a3d42" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <b>Pala</b><small>P</small>
+      </button>
+      <button id="pantalla" class="pantalla" title="Pantalla completa (F)" aria-label="Pantalla completa">⛶</button>
+      <div class="oleada" title="Dianas restantes">🎯 <span id="tiempo">3/3</span></div>
+    </section>
+
+    <section class="campo">
+      <canvas id="lienzo" width="800" height="440"></canvas>
+
+      <div id="lobby" class="menu">
+        <h2>Partida 1 contra 1</h2>
+        <p class="info">Creá una partida y pasale el código a tu rival.</p>
+        <div class="opciones">
+          <button id="crearP" class="grande">🌻 Jugar con plantas</button>
+          <button id="crearZ" class="grande">🧟 Jugar con zombis</button>
+        </div>
+        <p class="info">o unite con el código de tu rival</p>
+        <div class="fila-botones">
+          <input id="codigo" maxlength="4" placeholder="ABCD" autocomplete="off">
+          <button id="unirse" class="grande">Unirse</button>
+        </div>
+        <p id="estado" class="info"></p>
+      </div>
+
+      <div id="seleccion" class="menu" hidden>
+        <h2>Elegí tus cartas <span id="contador">0/6</span></h2>
+        <div id="rejilla" class="rejilla"></div>
+        <p id="info" class="info">Tocá una carta para elegirla o quitarla.</p>
+        <button id="listo" class="grande">¡Listo!</button>
+      </div>
+
+      <div id="fin" class="fin" hidden>
+        <h2 id="finTitulo"></h2>
+        <button id="volver">Volver al inicio</button>
+      </div>
+    </section>
+
+    <p class="ayuda">Plantas: destruí las tumbas y las 3 dianas 🎯 que esconden (solo se planta en las 6 columnas de la izquierda). Recogé los soles ☀️. Zombis: recogé cerebros 🧠, poné tumbas 🪦 que los produzcan y protegé las dianas. Los zombis se ponen en cualquier casilla de las 3 columnas de la derecha. Teclas 1, 2, 3… eligen cartas. P = pala (quita una planta, o una tumba o zombi). F = pantalla completa.</p>
+  </main>
+  <script src="cliente.js"></script>
+</body>
+</html>

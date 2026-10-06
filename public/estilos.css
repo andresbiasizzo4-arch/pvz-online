@@ -1,0 +1,267 @@
+/* ============================================================
+   Estilo sobrio: atardecer apagado, madera oscura, piedra gastada
+   y letras doradas envejecidas. Tipografías: Cinzel (títulos,
+   tallado en piedra) y Crimson Pro (texto), de Google Fonts.
+   ============================================================ */
+:root {
+  --madera-osc: #26170b;
+  --madera-clara: #6a4a30;
+  --piedra-osc: #17181b;
+  --hueso: #d8d3c2;
+  --oro: #d2b265;
+  --oro-osc: #8f7a45;
+  --pergamino: linear-gradient(#e6dcbc, #c9b98c);
+  --titulos: "Cinzel", "Trajan Pro", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --texto: "Crimson Pro", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --veta: repeating-linear-gradient(90deg, #4a3220 0 18px, #422c1b 18px 19px, #503825 19px 44px, #46301f 44px 45px);
+  --piedra-fondo: linear-gradient(170deg, #4f5257 0%, #393c41 50%, #2a2c30 100%);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  color: var(--hueso);
+  font-family: var(--texto);
+  background:
+    radial-gradient(ellipse 60% 16% at 10% 100%, #202b18 0 62%, transparent 63%),
+    radial-gradient(ellipse 70% 20% at 90% 100%, #27341d 0 62%, transparent 63%),
+    linear-gradient(#26303a 0%, #46545a 46%, #566245 80%, #2b3822 100%) fixed;
+}
+
+.juego { width: min(100%, 820px); padding: 12px; }
+
+/* ---- Título: cartel de madera oscura ---- */
+h1 {
+  position: relative;
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 9px 34px;
+  background: var(--veta);
+  border: 3px solid var(--madera-osc);
+  border-radius: 6px;
+  box-shadow: inset 0 2px 0 var(--madera-clara), 0 4px 0 #170d05, 0 8px 12px rgba(0, 0, 0, .4);
+  color: var(--oro);
+  font: 700 clamp(1.05rem, 3.4vw, 1.5rem) var(--titulos);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 #170d05, 0 0 8px rgba(0, 0, 0, .6);
+}
+h1::before, h1::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px; height: 7px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #9b9ba0, #38383d);
+}
+h1::before { left: 11px; }
+h1::after { right: 11px; }
+.rol {
+  margin-left: 12px;
+  color: #b7a98a;
+  font: italic 500 .62em var(--texto);
+  letter-spacing: .5px;
+  text-transform: none;
+}
+
+/* ---- Barra superior ---- */
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 10px;
+  background: var(--veta);
+  border: 3px solid var(--madera-osc);
+  border-radius: 10px 10px 0 0;
+  box-shadow: inset 0 2px 0 var(--madera-clara);
+}
+
+.soles {
+  min-width: 84px;
+  padding: 5px 10px;
+  background: var(--pergamino);
+  border: 2px solid #3a2616;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 3px 0 #170d05;
+  color: #3b2a16;
+  font: 700 1.15rem var(--titulos);
+  text-align: center;
+}
+
+.cartas { display: flex; gap: 5px; flex: 1; flex-wrap: wrap; }
+
+.oleada { font: 600 .95rem var(--titulos); letter-spacing: 1px; color: #d8cfb2; text-shadow: 0 2px 0 #170d05; }
+
+.pantalla {
+  padding: 5px 10px;
+  font: 700 1rem var(--titulos);
+  background: var(--pergamino);
+  color: #3b2a16;
+  border: 2px solid #3a2616;
+  border-radius: 6px;
+  box-shadow: 0 3px 0 #170d05;
+  cursor: pointer;
+}
+.pantalla:active { transform: translateY(2px); box-shadow: 0 1px 0 #170d05; }
+
+/* ---- Cartas ---- */
+.carta {
+  position: relative;
+  overflow: hidden;
+  width: 70px;
+  padding: 4px 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--pergamino);
+  color: #3b2a16;
+  border: 3px solid #3a2616;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4), 0 3px 0 #170d05;
+  cursor: pointer;
+  font: 700 .78rem var(--texto);
+}
+.carta:hover { filter: brightness(1.06); }
+.carta .em { font-size: 1.7rem; line-height: 1.2; }
+.carta img.em { width: 44px; height: 44px; object-fit: contain; }
+.carta small { font-size: .82rem; font-weight: 700; }
+.carta.elegida { border-color: #a8322d; }
+.carta.bloqueada { filter: grayscale(.85) brightness(.65); cursor: not-allowed; }
+.carta:focus-visible { outline: 2px solid var(--oro); outline-offset: 2px; }
+.enfria { position: absolute; left: 0; right: 0; top: 0; height: 0; background: rgba(0, 0, 0, .55); pointer-events: none; }
+
+/* ---- Tablero ---- */
+.campo {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+  border: 3px solid var(--madera-osc);
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  background: #2f4420;   /* franja a la derecha del césped, por donde entran los zombis */
+  box-shadow: 0 8px 0 rgba(0, 0, 0, .3), 0 14px 18px rgba(0, 0, 0, .4);
+}
+canvas { width: 100%; height: auto; display: block; cursor: pointer; }
+
+/* ---- Paneles de piedra: inicio, selección y fin de partida ---- */
+.menu, .fin {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  line-height: normal;
+}
+.menu {
+  z-index: 2;
+  padding: 14px 12px;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 25% 8%, rgba(255, 255, 255, .06), transparent 45%),
+    radial-gradient(circle at 80% 92%, rgba(0, 0, 0, .3), transparent 50%),
+    var(--piedra-fondo);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, .6);
+}
+#lobby { justify-content: center; gap: 12px; }
+.menu[hidden], .fin[hidden] { display: none; }
+.fin { justify-content: center; gap: 18px; background: rgba(14, 15, 18, .88); }
+
+.menu h2, .fin h2 {
+  margin: 0;
+  color: var(--hueso);
+  font: 700 clamp(1rem, 3vw, 1.35rem) var(--titulos);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .9), 0 1px 0 rgba(255, 255, 255, .16);   /* grabado en la piedra */
+}
+.menu h2::after {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 1px;
+  margin: 9px auto 0;
+  background: linear-gradient(90deg, transparent, var(--oro-osc), transparent);
+}
+.fin h2 { font-size: clamp(1.2rem, 4vw, 2rem); letter-spacing: 3px; padding: 0 14px; line-height: 1.4; }
+
+.rejilla {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  gap: 6px;
+}
+.menu .carta { width: auto; }
+.menu .carta.elegida { border-color: var(--oro); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4), 0 0 0 1px var(--oro), 0 3px 0 #170d05; }
+.info { margin: 0; min-height: 2.4em; font: italic 500 1.02rem var(--texto); color: #c3beaf; text-align: center; }
+
+/* Botones: lajas de piedra lisas */
+.menu button.grande, .fin button {
+  padding: 10px 22px;
+  background: linear-gradient(#52555a, #3b3e43);
+  color: var(--hueso);
+  border: 2px solid var(--piedra-osc);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 3px 0 #101113;
+  font: 700 .9rem var(--titulos);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .8);
+  cursor: pointer;
+}
+.menu button.grande:hover, .fin button:hover { filter: brightness(1.18); }
+.menu button.grande:active, .fin button:active { transform: translateY(2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 1px 0 #101113; }
+.menu button.grande:disabled { opacity: .4; cursor: not-allowed; }
+#listo, #volver, #unirse { color: var(--oro); }   /* acción principal en dorado envejecido */
+
+.fila-botones { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; width: 100%; }
+.opciones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; width: 100%; }
+.opciones button { flex: 1 1 200px; max-width: 290px; white-space: nowrap; letter-spacing: 1.5px; padding-left: 14px; padding-right: 14px; }
+.menu input {
+  width: 118px;
+  padding: 9px 10px;
+  background: #222428;
+  color: var(--hueso);
+  border: 2px solid var(--piedra-osc);
+  border-radius: 6px;
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, .8);
+  font: 700 1.15rem var(--titulos);
+  letter-spacing: 6px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.menu input::placeholder { color: #6f7176; }
+.menu input:focus { outline: 1px solid var(--oro-osc); }
+
+/* ---- Pie ---- */
+.ayuda { margin: 12px 2px 0; font: italic 500 1rem var(--texto); color: #cfc8b4; text-shadow: 0 1px 3px rgba(0, 0, 0, .8); }
+
+/* ---- Pantalla completa ---- */
+.juego.pseudo { position: fixed; inset: 0; z-index: 50; background: #2b3822; }
+.juego.completa {
+  --w: min(100vw, calc((100vh - 125px) * 800 / 440));   /* el tablero conserva su proporción */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  padding: 0;
+  background: linear-gradient(#26303a 0%, #46545a 50%, #2b3822 100%);
+}
+.juego.completa h1, .juego.completa .ayuda { display: none; }
+.juego.completa .barra, .juego.completa .campo { width: var(--w); }
+
+/* ---- Pala ---- */
+.pala[hidden] { display: none; }
+.pala svg { width: 38px; height: 38px; margin: 2px 0 0; }
+.pala small { opacity: .7; }
+.carta.pala { width: 62px; }
