@@ -8,9 +8,9 @@ const { COLS, FILAS, AC, AL, GX, W } = GEO;
 
 const MAX_CEREBROS = 400;
 const VALOR_CEREBRO = 25;    // cerebros que da cada cerebro recogido
-const TUMBA_VIDA = 250;
+const TUMBA_VIDA = 300;
 const TUMBA_PRODUCE = 14;    // segundos entre cerebros de cada tumba
-const DIANA_VIDA = 300;
+const DIANA_VIDA = 350;
 const NUM_DIANAS = 3;        // las plantas ganan al destruirlas todas
 const MAX_CARTAS = 6;        // cartas que cada jugador lleva a la partida
 
@@ -21,9 +21,9 @@ const PLANTAS = {
   repetidora:      { nombre: 'Repetidora', emoji: '🌿', costo: 200, vida: 100,  espera: 7,  desc: 'Dispara dos guisantes a la vez.' },
   nuez:            { nombre: 'Nuez',       emoji: '🥜', costo: 50,  vida: 600,  espera: 20, desc: 'Muro resistente que frena a los zombis.' },
   nuezalta:        { nombre: 'Nuez alta',  emoji: '🥥', costo: 125, vida: 1200, espera: 20, desc: 'Muro el doble de resistente.' },
-  cereza:          { nombre: 'Cereza',     emoji: '🍒', costo: 150, vida: 50,   espera: 30, desc: 'Explota y destruye zombis y tumbas en un área de 3x3 (no daña dianas).' },
-  jalapeno:        { nombre: 'Jalapeño',   emoji: '🌶️', costo: 125, vida: 50,   espera: 30, desc: 'Incinera zombis y tumbas de una fila (no daña dianas).' },
-  papamina:        { nombre: 'Papa mina',  emoji: '🥔', costo: 25,  vida: 100,  espera: 30, desc: 'Tarda 15 s en armarse; luego explota al contacto.' },
+  cereza:          { nombre: 'Cereza',     emoji: '🍒', costo: 150, vida: 50,   espera: 100, desc: 'Explota y destruye zombis y tumbas en un área de 3x3 (no daña dianas).' },
+  jalapeno:        { nombre: 'Jalapeño',   emoji: '🌶️', costo: 125, vida: 50,   espera: 100, desc: 'Incinera zombis y tumbas de una fila (no daña dianas).' },
+  papamina:        { nombre: 'Papa mina',  emoji: '🥔', costo: 25,  vida: 100,  espera: 100, desc: 'Tarda 15 s en armarse; luego explota al contacto.' },
   carnivora:       { nombre: 'Carnívora',  emoji: '🪴', costo: 150, vida: 100,  espera: 7,  desc: 'Se traga un zombi entero, pero tarda 25 s en masticar.' },
   aplastacalabaza: { nombre: 'Calabaza',   emoji: '🎃', costo: 50,  vida: 100,  espera: 30, desc: 'Aplasta al primer zombi que se le acerque.' },
 };
