@@ -30,15 +30,15 @@ const PLANTAS = {
 
 const ZOMBIS = {
   tumba: { nombre: 'Tumba', emoji: '🪦', costo: 50, vida: 0, espera: 8, vel: 0, tumba: true, desc: 'Produce cerebros con el tiempo. Se pone en las 4 columnas de la derecha. Las plantas pueden destruirla.' },
-  normal: { nombre: 'Zombi', emoji: '🧟', costo: 50, vida: 100, espera: 3, vel: 15, desc: 'El zombi de siempre.' },
-  bandera: { nombre: 'Bandera', emoji: '🚩', costo: 75, vida: 100, espera: 4, vel: 23, desc: 'Más rápido que el zombi normal.' },
-  saltador: { nombre: 'Pértiga', emoji: '🏃', costo: 100, vida: 130, espera: 6, vel: 38, salta: true, desc: 'Corre y salta sobre la primera planta que encuentra.' },
+  normal: { nombre: 'Zombi', emoji: '🧟', costo: 50, vida: 150, espera: 3, vel: 15, desc: 'El zombi de siempre.' },
+  bandera: { nombre: 'Bandera', emoji: '🚩', costo: 75, vida: 150, espera: 4, vel: 23, desc: 'Más rápido que el zombi normal.' },
+  saltador: { nombre: 'Pértiga', emoji: '🏃', costo: 100, vida: 180, espera: 6, vel: 38, salta: true, desc: 'Corre y salta sobre la primera planta que encuentra.' },
   cono: { nombre: 'Cono', emoji: '🚧', costo: 100, vida: 220, espera: 5, vel: 15, desc: 'Aguanta más golpes.' },
   periodico: { nombre: 'Periódico', emoji: '📰', costo: 100, vida: 190, espera: 6, vel: 15, desc: 'Se enfurece y acelera al perder el periódico.' },
   puerta: { nombre: 'Puerta', emoji: '🚪', costo: 125, vida: 320, espera: 7, vel: 15, desc: 'Su puerta resiste los guisantes (las explosiones sí lo dañan).' },
   caja: { nombre: 'Caja', emoji: '🎁', costo: 150, vida: 130, espera: 10, vel: 15, caja: true, desc: 'Explota a los pocos segundos y destruye plantas cercanas.' },
-  balde: { nombre: 'Balde', emoji: '🪣', costo: 150, vida: 450, espera: 8, vel: 14, desc: 'Muy resistente, pero cuesta caro.' },
-  futbolista: { nombre: 'Fútbol', emoji: '🏈', costo: 200, vida: 500, espera: 12, vel: 40, desc: 'Muy rápido y muy resistente.' },
+  balde: { nombre: 'Balde', emoji: '🪣', costo: 150, vida: 500, espera: 8, vel: 14, desc: 'Muy resistente, pero cuesta caro.' },
+  futbolista: { nombre: 'Fútbol', emoji: '🏈', costo: 200, vida: 600, espera: 12, vel: 40, desc: 'Muy rápido y muy resistente.' },
   gigante: { nombre: 'Gigante', emoji: '🦍', costo: 350, vida: 1500, espera: 25, vel: 10, dano: 150, desc: 'Aplasta plantas casi al instante.' },
 };
 
