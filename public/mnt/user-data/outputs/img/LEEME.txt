@@ -1,0 +1,52 @@
+IMÁGENES DEL JUEGO
+==================
+Formato: PNG. Las que falten se reemplazan automáticamente por emojis, así que
+podés ir agregándolas de a una.
+
+TAMAÑO DE LOS CUADROS
+  - 64 x 64 px por cuadro: plantas, zombis, tumbas y dianas.
+  - 32 x 32 px por cuadro: soles, cerebros, cortadoras y guisantes.
+  - Los fondos NO cambian: fondo.png sigue siendo 800 x 440 (imagen fija).
+Las animaciones son hojas HORIZONTALES: todos los cuadros del mismo tamaño, en fila,
+en una sola imagen. "En pantalla" es el tamaño final ya con la escala aplicada.
+Fondo transparente, y dibujá el personaje centrado en el cuadro.
+
+PLANTAS
+Archivo                       Cuadros  1 cuadro      Imagen total  En pantalla
+girasol.png                   6        64 x 64       384 x 64      80 px
+lanzaguisantes.png            6        64 x 64       384 x 64      80 px
+hielaguisantes.png            6        64 x 64       384 x 64      80 px
+repetidora.png                6        64 x 64       384 x 64      80 px
+nuez.png                      4        64 x 64       256 x 64      80 px
+nuezalta.png                  4        64 x 64       256 x 64      80 px
+cereza.png                    4        64 x 64       256 x 64      80 px
+jalapeno.png                  4        64 x 64       256 x 64      80 px
+papamina.png                  4        64 x 64       256 x 64      80 px
+carnivora.png                 6        64 x 64       384 x 64      80 px
+aplastacalabaza.png           4        64 x 64       256 x 64      80 px
+
+ZOMBIS (normal y con cono)
+Archivo                       Cuadros  1 cuadro      Imagen total  En pantalla
+zombi_caminar.png             8        64 x 64       512 x 64      88 px
+zombi_comer.png               6        64 x 64       384 x 64      88 px
+zombicono_caminar.png         8        64 x 64       512 x 64      88 px
+zombicono_comer.png           6        64 x 64       384 x 64      88 px
+
+OTROS
+Archivo                       Cuadros  1 cuadro      Imagen total  En pantalla
+guisante.png                  1        32 x 32       32 x 32       24 px
+sol.png                       8        32 x 32       256 x 32      64 px
+cortadora.png                 1        32 x 32       32 x 32       40 px
+
+FONDO
+fondo.png                     -        -             800 x 440
+
+ICONOS DE LAS CARTAS (imagen fija, se muestran a 44 x 44; podés usar 64 x 64)
+icono_<nombre>.png   por ejemplo icono_girasol.png, icono_nuez.png, icono_normal.png, icono_tumba.png
+
+AJUSTES
+Abrí script.js (o public/cliente.js en el proyecto online) y mirá el objeto SPRITES, arriba del todo:
+  cuadros  cantidad de cuadros de la hoja        escala  agranda o achica en pantalla
+  ancho / alto  tamaño de UN cuadro en la imagen  dx / dy  corre el dibujo en píxeles
+Si usás pixel art, poné CONFIG.pixelArt = true para que no se suavice al escalar.
+Para ver los cuadros sin deformar, la escala ideal es un número entero (1, 2) o 1.25 / 1.5.
