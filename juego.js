@@ -9,7 +9,7 @@ const { COLS, FILAS, AC, AL, GX, W } = GEO;
 const MAX_CEREBROS = 99999;
 const VALOR_CEREBRO = 25;    // cerebros que da cada cerebro recogido
 const TUMBA_VIDA = 500;
-const TUMBA_PRODUCE = 8;    // segundos entre cerebros de cada tumba
+const TUMBA_PRODUCE = 14;    // segundos entre cerebros de cada tumba
 const DIANA_VIDA = 700;
 const NUM_DIANAS = 3;        // las plantas ganan al destruirlas todas
 const MAX_CARTAS = 6;        // cartas que cada jugador lleva a la partida
@@ -148,7 +148,7 @@ class Juego {
 
     this.sigSol -= dt;
     if (this.sigSol <= 0) {
-      this.sigSol = 8;
+      this.sigSol = 14;
       this.nuevoSol(GX + 20 + Math.random() * (COLS * AC - 60), -30, 60 + Math.random() * (FILAS * AL - 120));
     }
     for (const s of this.caidos) { if (s.y < s.destino) s.y += 45 * dt; else s.vida -= dt; }
