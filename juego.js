@@ -6,26 +6,26 @@ const GEO = { COLS: 9, FILAS: 5, AC: 80, AL: 88, GX: 40, W: 800, TUMBA_COL: 5, P
               ZOMBI_COL_MIN: 6, ZOMBI_COL_MAX: 8 };   // columnas (0 = junto a la casa) donde se pueden poner zombis; TUMBA_COL: primera columna para tumbas
 const { COLS, FILAS, AC, AL, GX, W } = GEO;
 
-const MAX_CEREBROS = 400;
+const MAX_CEREBROS = 99999;
 const VALOR_CEREBRO = 25;    // cerebros que da cada cerebro recogido
-const TUMBA_VIDA = 300;
+const TUMBA_VIDA = 400;
 const TUMBA_PRODUCE = 14;    // segundos entre cerebros de cada tumba
-const DIANA_VIDA = 350;
+const DIANA_VIDA = 600;
 const NUM_DIANAS = 3;        // las plantas ganan al destruirlas todas
 const MAX_CARTAS = 6;        // cartas que cada jugador lleva a la partida
 
 const PLANTAS = {
   girasol:         { nombre: 'Girasol',    emoji: '🌻', costo: 50,  vida: 100,  espera: 5,  desc: 'Produce soles extra cada 8 segundos.' },
-  lanzaguisantes:  { nombre: 'Lanzador',   emoji: '🌱', costo: 100, vida: 100,  espera: 5,  desc: 'Dispara guisantes a los zombis de su fila.' },
+  lanzaguisantes:  { nombre: 'Lanzador',   emoji: '🌱', costo: 100, vida: 100,  espera: 25,  desc: 'Dispara guisantes a los zombis de su fila.' },
   hielaguisantes:  { nombre: 'Hielo',      emoji: '❄️', costo: 175, vida: 100,  espera: 5,  desc: 'Sus guisantes helados ralentizan a los zombis.' },
-  repetidora:      { nombre: 'Repetidora', emoji: '🌿', costo: 200, vida: 100,  espera: 7,  desc: 'Dispara dos guisantes a la vez.' },
-  nuez:            { nombre: 'Nuez',       emoji: '🥜', costo: 50,  vida: 600,  espera: 20, desc: 'Muro resistente que frena a los zombis.' },
-  nuezalta:        { nombre: 'Nuez alta',  emoji: '🥥', costo: 125, vida: 1200, espera: 20, desc: 'Muro el doble de resistente.' },
+  repetidora:      { nombre: 'Repetidora', emoji: '🌿', costo: 200, vida: 100,  espera: 25,  desc: 'Dispara dos guisantes a la vez.' },
+  nuez:            { nombre: 'Nuez',       emoji: '🥜', costo: 50,  vida: 600,  espera: 80, desc: 'Muro resistente que frena a los zombis.' },
+  nuezalta:        { nombre: 'Nuez alta',  emoji: '🥥', costo: 125, vida: 1200, espera: 100, desc: 'Muro el doble de resistente.' },
   cereza:          { nombre: 'Cereza',     emoji: '🍒', costo: 150, vida: 50,   espera: 100, desc: 'Explota y destruye zombis y tumbas en un área de 3x3 (no daña dianas).' },
   jalapeno:        { nombre: 'Jalapeño',   emoji: '🌶️', costo: 125, vida: 50,   espera: 100, desc: 'Incinera zombis y tumbas de una fila (no daña dianas).' },
   papamina:        { nombre: 'Papa mina',  emoji: '🥔', costo: 25,  vida: 100,  espera: 100, desc: 'Tarda 15 s en armarse; luego explota al contacto.' },
-  carnivora:       { nombre: 'Carnívora',  emoji: '🪴', costo: 150, vida: 100,  espera: 7,  desc: 'Se traga un zombi entero, pero tarda 25 s en masticar.' },
-  aplastacalabaza: { nombre: 'Calabaza',   emoji: '🎃', costo: 50,  vida: 100,  espera: 30, desc: 'Aplasta al primer zombi que se le acerque.' },
+  carnivora:       { nombre: 'Carnívora',  emoji: '🪴', costo: 150, vida: 100,  espera: 100,  desc: 'Se traga un zombi entero, pero tarda 25 s en masticar.' },
+  aplastacalabaza: { nombre: 'Calabaza',   emoji: '🎃', costo: 50,  vida: 100,  espera: 100, desc: 'Aplasta al primer zombi que se le acerque.' },
 };
 
 const ZOMBIS = {
@@ -39,7 +39,7 @@ const ZOMBIS = {
   caja: { nombre: 'Caja', emoji: '🎁', costo: 150, vida: 130, espera: 10, vel: 15, caja: true, desc: 'Explota a los pocos segundos y destruye plantas cercanas.' },
   balde: { nombre: 'Balde', emoji: '🪣', costo: 150, vida: 500, espera: 8, vel: 14, desc: 'Muy resistente, pero cuesta caro.' },
   futbolista: { nombre: 'Fútbol', emoji: '🏈', costo: 200, vida: 600, espera: 12, vel: 40, desc: 'Muy rápido y muy resistente.' },
-  gigante: { nombre: 'Gigante', emoji: '🦍', costo: 350, vida: 1500, espera: 25, vel: 10, dano: 150, desc: 'Aplasta plantas casi al instante.' },
+  gigante: { nombre: 'Gigante', emoji: '🦍', costo: 350, vida: 1700, espera: 25, vel: 10, dano: 150, desc: 'Aplasta plantas casi al instante.' },
 };
 
 class Juego {
