@@ -1,0 +1,408 @@
+/* ============================================================
+   Estilo sobrio: atardecer apagado, madera oscura, piedra gastada
+   y letras doradas envejecidas. Tipografías: Cinzel (títulos,
+   tallado en piedra) y Crimson Pro (texto), de Google Fonts.
+   ============================================================ */
+:root {
+  --madera-osc: #26170b;
+  --madera-clara: #6a4a30;
+  --piedra-osc: #17181b;
+  --hueso: #d8d3c2;
+  --oro: #d2b265;
+  --oro-osc: #8f7a45;
+  --pergamino: linear-gradient(#e6dcbc, #c9b98c);
+  --titulos: "Cinzel", "Trajan Pro", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --texto: "Crimson Pro", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --veta: repeating-linear-gradient(90deg, #4a3220 0 18px, #422c1b 18px 19px, #503825 19px 44px, #46301f 44px 45px);
+  --piedra-fondo: linear-gradient(170deg, #4f5257 0%, #393c41 50%, #2a2c30 100%);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  color: var(--hueso);
+  font-family: var(--texto);
+  background: #1c241e;                       /* color de respaldo si la imagen no carga */
+}
+
+/* Fondo: imagen difuminada y oscurecida para que la ventana del juego sea lo que resalta.
+   Para cambiar cuánto se difumina o se oscurece, tocá estas dos variables. */
+:root { --difuminado: 7px; --oscuridad: .62; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: -40px;                              /* sobra margen para que el difuminado no deje bordes claros */
+  z-index: -2;
+  background: url("img/fondo-pagina.jpg") center / cover no-repeat;
+  filter: blur(var(--difuminado)) saturate(.85) brightness(var(--oscuridad));
+  pointer-events: none;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(rgba(18, 24, 22, .30), rgba(18, 24, 22, .55));
+  pointer-events: none;
+}
+
+.juego { width: min(100%, 820px); padding: 12px; }
+
+/* ---- Cabecera: logo ---- */
+.cabecera { display: flex; align-items: center; gap: 14px; margin: 0 0 8px; }
+h1 { margin: 0; line-height: 0; }
+.logo { display: block; height: 92px; width: auto; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .55)); }
+.rol {
+  padding: 4px 14px;
+  background: rgba(20, 22, 25, .72);
+  border: 1px solid var(--oro-osc);
+  border-radius: 999px;
+  color: var(--hueso);
+  font: italic 500 1rem var(--texto);
+}
+.rol:empty { display: none; }
+
+/* ---- Barra superior ---- */
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;   /* la barra nunca cambia de alto, así el tablero no se mueve */
+  padding: 8px 10px;
+  background: var(--veta);
+  border: 3px solid var(--madera-osc);
+  border-radius: 10px 10px 0 0;
+  box-shadow: inset 0 2px 0 var(--madera-clara);
+}
+
+.soles {
+  flex: 0 0 108px;     /* ancho fijo: que cambien los dígitos no mueve nada */
+  width: 108px;
+  padding: 5px 6px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  background: var(--pergamino);
+  border: 2px solid #3a2616;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 3px 0 #170d05;
+  color: #3b2a16;
+  font: 700 1.05rem var(--titulos);
+  text-align: center;
+}
+
+.cartas { display: flex; gap: 5px; flex: 1 1 0; min-width: 0; flex-wrap: nowrap; }
+
+.oleada { flex: 0 0 auto; white-space: nowrap; font: 600 .9rem var(--titulos); letter-spacing: 1px; color: #d8cfb2; text-shadow: 0 2px 0 #170d05; }
+
+.pantalla {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  font: 700 1rem var(--titulos);
+  background: var(--pergamino);
+  color: #3b2a16;
+  border: 2px solid #3a2616;
+  border-radius: 6px;
+  box-shadow: 0 3px 0 #170d05;
+  cursor: pointer;
+}
+.pantalla:active { transform: translateY(2px); box-shadow: 0 1px 0 #170d05; }
+
+/* ---- Cartas ---- */
+.carta {
+  position: relative;
+  overflow: hidden;
+  width: 70px;
+  flex: 0 1 70px;
+  min-width: 54px;
+  padding: 4px 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--pergamino);
+  color: #3b2a16;
+  border: 3px solid #3a2616;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4), 0 3px 0 #170d05;
+  cursor: pointer;
+  font: 700 .78rem var(--texto);
+}
+.carta:hover { filter: brightness(1.06); }
+.carta .em { font-size: 1.7rem; line-height: 1.2; }
+.carta img.em { width: 44px; height: 44px; object-fit: contain; }
+.carta small { font-size: .82rem; font-weight: 700; }
+.carta.elegida { border-color: #a8322d; }
+.carta.bloqueada { filter: grayscale(.85) brightness(.65); cursor: not-allowed; }
+.carta:focus-visible { outline: 2px solid var(--oro); outline-offset: 2px; }
+.enfria { position: absolute; left: 0; right: 0; top: 0; height: 0; background: rgba(0, 0, 0, .55); pointer-events: none; }
+
+/* ---- Tablero ---- */
+.campo {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+  border: 3px solid var(--madera-osc);
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  background: #2f4420;   /* franja a la derecha del césped, por donde entran los zombis */
+  box-shadow: 0 8px 0 rgba(0, 0, 0, .3), 0 14px 18px rgba(0, 0, 0, .4);
+}
+canvas { width: 100%; height: auto; display: block; cursor: pointer; }
+
+/* ---- Paneles de piedra: inicio, selección y fin de partida ---- */
+.menu, .fin {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  line-height: normal;
+}
+.menu {
+  z-index: 2;
+  padding: 14px 12px;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 25% 8%, rgba(255, 255, 255, .06), transparent 45%),
+    radial-gradient(circle at 80% 92%, rgba(0, 0, 0, .3), transparent 50%),
+    var(--piedra-fondo);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, .6);
+}
+#lobby { justify-content: flex-start; gap: 12px; }
+#lobby::before, #lobby::after { content: ""; flex: 1 0 0; }   /* centra el contenido, y si no entra deja desplazarse desde arriba */
+.logo-lobby { display: none; }
+.menu[hidden], .fin[hidden] { display: none; }
+.fin { justify-content: center; gap: 18px; background: rgba(14, 15, 18, .88); }
+
+.menu h2, .fin h2 {
+  margin: 0;
+  color: var(--hueso);
+  font: 700 clamp(1rem, 3vw, 1.35rem) var(--titulos);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .9), 0 1px 0 rgba(255, 255, 255, .16);   /* grabado en la piedra */
+}
+.menu h2::after {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 1px;
+  margin: 9px auto 0;
+  background: linear-gradient(90deg, transparent, var(--oro-osc), transparent);
+}
+.fin h2 { font-size: clamp(1.2rem, 4vw, 2rem); letter-spacing: 3px; padding: 0 14px; line-height: 1.4; }
+
+/* Selección de cartas: mismas cartas compactas que en la partida + vista previa a la derecha */
+.selector { display: flex; gap: 14px; width: 100%; align-items: flex-start; }
+.rejilla { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; align-content: flex-start; }
+.previa {
+  flex: 0 0 188px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 8px 10px;
+  text-align: center;
+  background: rgba(0, 0, 0, .22);
+  border: 2px solid var(--piedra-osc);
+  border-radius: 8px;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, .55);
+}
+.previa canvas { width: 112px; height: 112px; background: radial-gradient(circle at 50% 70%, rgba(255, 255, 255, .10), transparent 70%); cursor: default; }
+.previa b { color: var(--hueso); font: 700 .95rem var(--titulos); letter-spacing: 2px; text-transform: uppercase; }
+.previa small { color: var(--oro); font: 600 .85rem var(--texto); }
+.previa p { margin: 2px 0 0; font: italic 500 .92rem/1.2 var(--texto); color: #c3beaf; }
+.menu .carta.elegida { border-color: var(--oro); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4), 0 0 0 1px var(--oro), 0 3px 0 #170d05; }
+.info { margin: 0; min-height: 2.4em; font: italic 500 1.02rem var(--texto); color: #c3beaf; text-align: center; }
+
+/* Botones: lajas de piedra lisas */
+.menu button.grande, .fin button {
+  padding: 10px 22px;
+  background: linear-gradient(#52555a, #3b3e43);
+  color: var(--hueso);
+  border: 2px solid var(--piedra-osc);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 3px 0 #101113;
+  font: 700 .9rem var(--titulos);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, .8);
+  cursor: pointer;
+}
+.menu button.grande:hover, .fin button:hover { filter: brightness(1.18); }
+.menu button.grande:active, .fin button:active { transform: translateY(2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 1px 0 #101113; }
+.menu button.grande:disabled { opacity: .4; cursor: not-allowed; }
+#listo, #volver, #unirse { color: var(--oro); }   /* acción principal en dorado envejecido */
+
+.fila-botones { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; width: 100%; }
+.opciones { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; width: 100%; }
+.opciones button { flex: 1 1 200px; max-width: 290px; white-space: nowrap; letter-spacing: 1.5px; padding-left: 14px; padding-right: 14px; }
+.menu input {
+  width: 118px;
+  padding: 9px 10px;
+  background: #222428;
+  color: var(--hueso);
+  border: 2px solid var(--piedra-osc);
+  border-radius: 6px;
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, .8);
+  font: 700 1.15rem var(--titulos);
+  letter-spacing: 6px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.menu input::placeholder { color: #6f7176; }
+.menu input:focus { outline: 1px solid var(--oro-osc); }
+
+/* ---- Pie ---- */
+.ayuda { margin: 12px 2px 0; font: italic 500 1rem var(--texto); color: #cfc8b4; text-shadow: 0 1px 3px rgba(0, 0, 0, .8); }
+
+/* ---- Pantalla completa ---- */
+.juego.pseudo { position: fixed; inset: 0; z-index: 50; }
+.juego.completa {
+  --w: min(100vw, calc((100vh - 125px) * 800 / 440));   /* el tablero conserva su proporción */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  padding: 0;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #1c241e;
+}
+.juego.completa::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  z-index: -1;
+  background: linear-gradient(rgba(18, 24, 22, .30), rgba(18, 24, 22, .55)), url("img/fondo-pagina.jpg") center / cover no-repeat;
+  filter: blur(var(--difuminado)) saturate(.85) brightness(var(--oscuridad));
+}
+.juego.completa .cabecera, .juego.completa .ayuda, .juego.completa .giro { display: none; }
+.juego.completa .barra, .juego.completa .campo { width: var(--w); }
+
+/* ---- Pala ---- */
+.pala[hidden] { display: none; }
+.pala svg { width: 38px; height: 38px; margin: 2px 0 0; }
+.pala small { opacity: .7; }
+.carta.pala { flex: 0 0 58px; width: 58px; min-width: 58px; }
+
+@media (max-width: 700px) {
+  .selector { flex-direction: column; align-items: center; }
+  .previa { flex-basis: auto; width: 100%; }
+}
+
+/* ---- Modo contra el bot: pestañas y niveles ---- */
+[hidden] { display: none !important; }
+.panel { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+.pestanas { display: flex; gap: 6px; }
+.pestana, .nivel {
+  padding: 7px 16px;
+  background: linear-gradient(#45484d, #313438);
+  color: #aaa69a;
+  border: 2px solid var(--piedra-osc);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 3px 0 #101113;
+  font: 700 .8rem var(--titulos);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.pestana:hover, .nivel:hover { filter: brightness(1.15); }
+.pestana.activa, .nivel.activo { color: var(--oro); background: linear-gradient(#25272a, #35383c); box-shadow: inset 0 3px 6px rgba(0, 0, 0, .7); border-color: var(--oro-osc); }
+.niveles { display: flex; gap: 8px; }
+.nivel { min-width: 92px; }
+
+/* ============================================================
+   ADAPTABLE A MÓVILES
+   ============================================================ */
+html { -webkit-text-size-adjust: 100%; }
+body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+button, canvas { touch-action: manipulation; }          /* sin zoom por doble toque */
+.juego { padding-left: max(12px, env(safe-area-inset-left)); padding-right: max(12px, env(safe-area-inset-right)); padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+.giro { display: none; }
+
+@media (pointer: coarse) {
+  .pantalla { min-width: 40px; min-height: 40px; }
+  .ayuda { display: none; }                              /* las teclas de atajo no sirven en el celular */
+}
+
+/* Pantallas angostas (celular en vertical) y celulares en horizontal: los menús ocupan toda la pantalla,
+   porque el tablero reducido no alcanzaría para mostrarlos. */
+@media (max-width: 700px), (max-height: 480px) {
+  .menu, .fin { position: fixed; inset: 0; z-index: 40; }
+  .menu { padding: max(14px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
+  /* la pantalla de inicio deja ver el fondo difuminado y muestra el logo (la cabecera queda tapada) */
+  #lobby { background: linear-gradient(rgba(18, 22, 20, .60), rgba(18, 22, 20, .82)); box-shadow: none; }
+  .logo-lobby { display: block; height: 84px; margin: 2px auto 0; }
+  .juego.inicio .cabecera, .juego.inicio .barra, .juego.inicio canvas, .juego.inicio .giro, .juego.inicio .ayuda { visibility: hidden; }   /* nada se ve detrás del inicio */
+  .juego.inicio .campo { background: transparent; border-color: transparent; box-shadow: none; }
+}
+@media (max-height: 480px) { .logo-lobby { height: 46px; } #lobby { gap: 8px; } }
+@media (max-width: 700px) { body { align-items: start; } }
+
+/* Celular en vertical */
+@media (max-width: 700px) {
+  .juego { padding-top: 8px; padding-left: max(8px, env(safe-area-inset-left)); padding-right: max(8px, env(safe-area-inset-right)); }
+  .cabecera { justify-content: center; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+  .logo { height: 58px; }
+  .rol { font-size: .9rem; padding: 2px 10px; }
+
+  .barra { flex-wrap: wrap; padding: 6px; gap: 6px; }
+  .soles { order: 1; flex: 0 0 96px; width: 96px; }
+  .oleada { order: 2; margin-left: auto; }
+  .carta.pala { order: 3; flex: 0 0 52px; width: 52px; min-width: 52px; }
+  #sonido { order: 4; }
+  #pantalla { order: 5; }
+  .cartas { order: 6; flex: 1 1 100%; flex-wrap: nowrap; justify-content: center; gap: 4px; }
+  .cartas .carta { flex: 1 1 0; width: auto; min-width: 0; max-width: 64px; padding: 3px 1px; font-size: .66rem; }
+  .carta img.em { width: 32px; height: 32px; }
+  .carta .em { font-size: 1.4rem; }
+  .carta small { font-size: .7rem; }
+  .carta b { max-width: 100%; overflow: hidden; white-space: nowrap; }
+
+  .rejilla { justify-content: center; }
+  .menu .carta { flex: 0 0 64px; width: 64px; }
+  .selector { flex-direction: column; align-items: center; }
+  .previa { flex: 0 0 auto; width: 100%; max-width: 420px; display: grid; grid-template-columns: 96px 1fr; column-gap: 12px; align-items: center; text-align: left; }
+  .previa canvas { grid-column: 1; grid-row: 1 / span 3; width: 96px; height: 96px; }
+  .previa b, .previa small, .previa p { grid-column: 2; }
+  .lapida, .opciones button { max-width: none; }
+  .opciones button { flex: 1 1 100%; }
+  .niveles .nivel { min-width: 84px; }
+  .giro { display: none; }
+}
+@media (max-width: 700px) and (orientation: portrait) and (pointer: coarse) {
+  .giro { display: block; margin: 8px 4px 0; text-align: center; font: italic 500 .95rem var(--texto); color: #d6d0bd; text-shadow: 0 1px 3px rgba(0, 0, 0, .8); }
+}
+
+/* Celular en horizontal: sin cabecera, barra compacta y el tablero lo más grande que entre */
+@media (max-height: 480px) {
+  .juego { --w: min(calc(100vw - 16px), calc((100vh - 80px) * 800 / 440)); padding: 4px 8px; width: 100%; max-width: none;
+           display: flex; flex-direction: column; align-items: center; }
+  .cabecera, .ayuda, .giro { display: none; }
+  .barra, .campo { width: var(--w); }
+  .barra { flex-wrap: nowrap; padding: 4px 6px; gap: 4px; }
+  .soles { flex: 0 0 84px; width: 84px; font-size: .9rem; padding: 3px 4px; }
+  .cartas { flex-wrap: nowrap; gap: 3px; }
+  .cartas .carta { flex: 0 1 52px; width: 52px; min-width: 40px; padding: 2px 1px; font-size: .6rem; }
+  .cartas .carta b { display: none; }                   /* sin el nombre: queda el icono y el costo */
+  .carta img.em { width: 28px; height: 28px; }
+  .carta .em { font-size: 1.3rem; }
+  .carta small { font-size: .64rem; }
+  .carta.pala { flex: 0 0 44px; width: 44px; min-width: 44px; padding: 4px 0; }
+  .pala b, .pala small { display: none; }
+  .pala svg { width: 30px; height: 30px; margin: 0; }
+  .pantalla { padding: 2px 6px; }
+  .oleada { font-size: .8rem; }
+  .juego.completa { --w: min(100vw, calc((100vh - 80px) * 800 / 440)); }
+}
