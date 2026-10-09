@@ -1,0 +1,53 @@
+SONIDOS DEL JUEGO
+=================
+Los archivos de esta carpeta son sonidos de PRUEBA generados por código (tonos y ruido).
+Reemplazalos por los tuyos: pisá el archivo con otro del MISMO NOMBRE, o cambiá la ruta en
+el objeto SONIDOS de public/sonidos.js. Formatos: wav, mp3 u ogg. Si un archivo falta,
+ese sonido simplemente no suena.
+
+CUÁNDO SUENA CADA UNO              (duración recomendada)
+--------------------------------------------------------------
+plantar.wav      una planta se pone en el tablero (lo oyen los dos)          0,1 - 0,3 s
+pala.wav         se quita una planta, tumba o zombi con la pala              0,1 - 0,3 s
+sol.wav          el jugador de plantas recoge un sol                         0,2 - 0,5 s
+cerebro.wav      el jugador zombi recoge un cerebro                          0,2 - 0,5 s
+tumba.wav        el jugador zombi pone una tumba                             0,2 - 0,5 s
+zombi.wav        se pone un zombi en el tablero                              0,3 - 1 s
+horda.wav        el zombi bandera llama a su horda                           0,5 - 1,5 s
+disparo.wav      una planta dispara un guisante (muy frecuente: corto)       0,05 - 0,15 s
+golpe.wav        un guisante da en un zombi, tumba o diana (muy frecuente)   0,03 - 0,1 s
+explosion.wav    cereza, papa mina o zombi caja explotan                     0,4 - 1 s
+fuego.wav        el jalapeño quema una fila                                  0,4 - 1 s
+aplastar.wav     la calabaza aplasta a un zombi                              0,2 - 0,5 s
+tragar.wav       la carnívora se traga a un zombi                            0,2 - 0,6 s
+comer.wav        un zombi empieza a comerse una planta                       0,1 - 0,4 s
+zombi_muere.wav  un zombi muere                                              0,2 - 0,6 s
+planta_muere.wav una planta es destruida                                     0,2 - 0,5 s
+tumba_rota.wav   una tumba es destruida                                      0,2 - 0,5 s
+diana_rota.wav   una diana es destruida                                      0,3 - 0,8 s
+cortadora.wav    se activa una cortadora                                     0,4 - 1 s
+seleccionar.wav  elegir una carta o la pala (solo lo oye quien lo toca)      0,03 - 0,1 s
+victoria.wav     fin de partida: ganaste                                     1 - 3 s
+derrota.wav      fin de partida: perdiste                                    1 - 3 s
+musica.mp3       (opcional) música de fondo en bucle durante la partida      la que quieras
+
+CÓMO PERSONALIZARLOS (todo en public/sonidos.js)
+--------------------------------------------------------------
+- Volumen de cada uno:   volumen: 0.5          (0 a 1)
+- Variedad:              src: ['audio/a.wav', 'audio/b.wav', 'audio/c.wav']   (elige uno al azar)
+- Variación de tono:     variacion: 0.1        (cambia el tono al azar ±10 %)
+- Evitar el "ruido" cuando algo pasa muy seguido:  espera: 120   (milisegundos mínimos entre dos)
+- Volumen general:       VOLUMEN_GENERAL       (arriba del archivo)
+- Sonido distinto por tipo: agregá una entrada "<evento>_<tipo>" y se usa en lugar del genérico.
+    zombi_gigante    cuando se pone un zombi gigante
+    plantar_nuez     cuando se planta una nuez
+    zombi_muere_caja cuando muere un zombi caja
+  Tipos de planta:  girasol, lanzaguisantes, hielaguisantes, repetidora, nuez, nuezalta, cereza,
+                    jalapeno, papamina, carnivora, aplastacalabaza
+  Tipos de zombi:   normal, bandera, saltador, cono, periodico, puerta, caja, balde, futbolista, gigante
+  (Los eventos con tipo son: plantar, zombi, zombi_muere y planta_muere.)
+
+DENTRO DEL JUEGO
+--------------------------------------------------------------
+- Botón del parlante (o tecla M): silencia o activa todo el sonido. Se recuerda entre partidas.
+- Los navegadores no permiten audio hasta el primer clic: es normal que no suene en el inicio.
