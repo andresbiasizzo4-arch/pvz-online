@@ -40,7 +40,7 @@ const ZOMBIS = {
   caja: { nombre: 'Caja', emoji: '🎁', costo: 150, vida: 220, espera: 10, vel: 15, caja: true, desc: 'Explota a los pocos segundos y destruye plantas cercanas.' },
   balde: { nombre: 'Balde', emoji: '🪣', costo: 150, vida: 500, espera: 8, vel: 14, desc: 'Muy resistente, pero cuesta caro.' },
   futbolista: { nombre: 'Fútbol', emoji: '🏈', costo: 200, vida: 600, espera: 12, vel: 23, desc: 'Muy rápido y muy resistente.' },
-  gigante: { nombre: 'Gigante', emoji: '🦍', costo: 350, vida: 1700, espera: 25, vel: 10, dano: 150, desc: 'Aplasta plantas casi al instante.' },
+  gigante: { nombre: 'Gigante', emoji: '🦍', costo: 250, vida: 1700, espera: 25, vel: 10, dano: 150, desc: 'Aplasta plantas casi al instante.' },
 };
 
 class Juego {
