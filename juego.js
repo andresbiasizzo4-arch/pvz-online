@@ -30,7 +30,7 @@ const PLANTAS = {
 };
 
 const ZOMBIS = {
-  tumba: { nombre: 'Tumba', emoji: '🪦', costo: 50, vida: 0, espera: 8, vel: 0, tumba: true, desc: 'Produce cerebros con el tiempo. Se pone en las 4 columnas de la derecha. Las plantas pueden destruirla.' },
+  tumba: { nombre: 'Tumba', emoji: '🪦', costo: 50, vida: 0, espera: 5, vel: 0, tumba: true, desc: 'Produce cerebros con el tiempo. Se pone en las 4 columnas de la derecha. Las plantas pueden destruirla.' },
   normal: { nombre: 'Zombi', emoji: '🧟', costo: 50, vida: 150, espera: 3, vel: 15, desc: 'El zombi de siempre.' },
   bandera: { nombre: 'Bandera', emoji: '🚩', costo: 200, vida: 150, espera: 15, vel: 15, horda: true, desc: 'Al levantar su bandera llama a un zombi normal en cada casilla libre de su columna.' },
   saltador: { nombre: 'Pértiga', emoji: '🏃', costo: 100, vida: 180, espera: 6, vel: 23, salta: true, desc: 'Corre y salta sobre la primera planta que encuentra (menos la nuez alta).' },
