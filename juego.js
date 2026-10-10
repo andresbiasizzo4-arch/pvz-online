@@ -37,7 +37,7 @@ const ZOMBIS = {
   cono: { nombre: 'Cono', emoji: '🚧', costo: 100, vida: 220, espera: 5, vel: 15, desc: 'Aguanta más golpes.' },
   periodico: { nombre: 'Periódico', emoji: '📰', costo: 100, vida: 190, espera: 6, vel: 15, desc: 'Se enfurece y acelera al perder el periódico.' },
   puerta: { nombre: 'Puerta', emoji: '🚪', costo: 125, vida: 320, espera: 7, vel: 15, desc: 'Su puerta resiste los guisantes (las explosiones sí lo dañan).' },
-  caja: { nombre: 'Caja', emoji: '🎁', costo: 150, vida: 180, espera: 10, vel: 15, caja: true, desc: 'Explota a los pocos segundos y destruye plantas cercanas.' },
+  caja: { nombre: 'Caja', emoji: '🎁', costo: 150, vida: 220, espera: 10, vel: 15, caja: true, desc: 'Explota a los pocos segundos y destruye plantas cercanas.' },
   balde: { nombre: 'Balde', emoji: '🪣', costo: 150, vida: 500, espera: 8, vel: 14, desc: 'Muy resistente, pero cuesta caro.' },
   futbolista: { nombre: 'Fútbol', emoji: '🏈', costo: 200, vida: 600, espera: 12, vel: 23, desc: 'Muy rápido y muy resistente.' },
   gigante: { nombre: 'Gigante', emoji: '🦍', costo: 350, vida: 1700, espera: 25, vel: 10, dano: 150, desc: 'Aplasta plantas casi al instante.' },
